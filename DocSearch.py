@@ -42,6 +42,14 @@ def get_docs_from_file(uploaded_file):
       loader = TextLoader(tmp_file_path)
       docs.extend(loader.load())
 
+ # Split the document into chunks
+        text_splitter = RecursiveCharacterTextSplitter(
+             chunk_size=200,
+             chunk_overlap=20
+        )
+        split_docs = text_splitter.split_documents(docs)
+        return split_docs
+
 #Create a Vector Database
 def create_vector_store(docs):
     embedding = OpenAIEmbeddings(api_key=openai_api_key)
