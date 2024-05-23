@@ -44,13 +44,13 @@ def get_docs_from_file(uploaded_file):
 
 #Create a Vector Database
 def create_vector_store(docs):
-    embedding = OpenAIEmbeddings(api_key=openaikey)
+    embedding = OpenAIEmbeddings(api_key=openai_api_key)
     vectorStore = FAISS.from_documents(docs, embedding=embedding)
     return vectorStore
 
 #Putting it all together
 def create_chain(vectorStore):
-    model = ChatOpenAI(api_key=openaikey,
+    model = ChatOpenAI(api_key=openai_api_key,
         temperature=0.4,
         model='gpt-3.5-turbo-1106'
     )
